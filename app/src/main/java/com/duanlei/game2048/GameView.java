@@ -36,10 +36,15 @@ public class GameView extends GridLayout {
         initGameView();
     }
 
-    private void initGameView() {
 
+    @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        super.onMeasure(widthSpec, widthSpec);
+    }
+
+    private void initGameView() {
         setColumnCount(4);
-        setBackgroundColor(0xffbbada0);
+        setBackgroundColor(getResources().getColor(R.color.game_background));
 
 
         //判断用户的意图，记录下手指按下，和手指离开的位置
@@ -274,7 +279,7 @@ public class GameView extends GridLayout {
         addRandomNum();
         addRandomNum();
 
-        mOnGameListener.clearScore();
+        //mOnGameListener.clearScore();
     }
 
     //添加随机数

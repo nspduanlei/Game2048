@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements GameView.OnGameLi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         gameView.startGame();
+                        clearScore();
                     }
                 }).show();
     }

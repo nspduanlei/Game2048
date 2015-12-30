@@ -18,7 +18,6 @@ public class Card extends FrameLayout {
 
         label = new TextView(getContext());
         label.setTextSize(32);
-        label.setBackgroundColor(0x33ffffff);
         label.setGravity(Gravity.CENTER);
 
         LayoutParams lp = new LayoutParams(-1, -1);
@@ -36,6 +35,66 @@ public class Card extends FrameLayout {
 
     public void setNum(int num) {
         this.num = num;
+
+
+        switch (num) {
+            case 0:
+                label.setBackgroundColor(0x33ffffff);
+                break;
+
+            case 2:
+                label.setBackgroundColor(getResources().getColor(R.color.c2));
+                break;
+
+            case 4:
+                label.setBackgroundColor(getResources().getColor(R.color.c4));
+                break;
+
+            case 8:
+                label.setBackgroundColor(getResources().getColor(R.color.c8));
+                break;
+
+            case 16:
+                label.setBackgroundColor(getResources().getColor(R.color.c16));
+                break;
+
+            case 32:
+                label.setBackgroundColor(getResources().getColor(R.color.c32));
+                break;
+
+            case 64:
+                label.setBackgroundColor(getResources().getColor(R.color.c64));
+                break;
+
+            case 128:
+                label.setBackgroundColor(getResources().getColor(R.color.c128));
+                break;
+
+            case 256:
+                label.setBackgroundColor(getResources().getColor(R.color.c256));
+                break;
+
+            case 512:
+                label.setBackgroundColor(getResources().getColor(R.color.c512));
+                break;
+
+            case 2048:
+                label.setBackgroundColor(getResources().getColor(R.color.c2048));
+                break;
+
+            case 4096:
+                label.setBackgroundColor(getResources().getColor(R.color.c4096));
+                break;
+
+            case 8192:
+                label.setBackgroundColor(getResources().getColor(R.color.c8192));
+                break;
+
+            default:
+                label.setBackgroundColor(getResources().getColor(R.color.c_other));
+                break;
+
+        }
 
         if (num <= 0) {
             label.setText("");
