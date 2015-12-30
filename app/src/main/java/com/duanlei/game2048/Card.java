@@ -101,7 +101,6 @@ public class Card extends FrameLayout {
         } else {
             label.setText(String.valueOf(num));
         }
-
     }
 
 

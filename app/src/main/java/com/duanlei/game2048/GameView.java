@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
@@ -108,14 +110,22 @@ public class GameView extends GridLayout {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
                 for (int x1 = x + 1; x1 < 4; x1++) {
+
+
                     if (cardsMap[x1][y].getNum() > 0) {
                         if (cardsMap[x][y].getNum() <= 0) {
+
+                            //移动到空白位置
                             cardsMap[x][y].setNum(cardsMap[x1][y].getNum());
                             cardsMap[x1][y].setNum(0);
+
                             x--;
 
                             isMerge = true;
                         } else if (cardsMap[x][y].equals(cardsMap[x1][y])){
+
+
+                            //合并数字
                             cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
                             cardsMap[x1][y].setNum(0);
 
@@ -296,7 +306,24 @@ public class GameView extends GridLayout {
         Point p = emptyPoints.remove((int)(Math.random() * emptyPoints.size()));
         //在随机的位置上设置随机值 2，4，比例为 9 ： 1
         cardsMap[p.x][p.y].setNum(Math.random() > 0.1 ? 2 : 4);
+
+        animCreate(cardsMap[p.x][p.y]);
     }
+
+    /**
+     * 生成卡片动画
+     * @param card
+     */
+    private void animCreate(Card card) {
+        ScaleAnimation sa = new ScaleAnimation(
+                0.1f, 1, 0.1f, 1, Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+
+        sa.setDuration(100);
+        card.setAnimation(null);
+        card.startAnimation(sa);
+    }
+
 
     //检查游戏是否结束
     private void checkComplete() {
