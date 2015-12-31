@@ -19,11 +19,14 @@ import java.util.List;
  */
 public class GameView extends GridLayout {
 
+    public static final int ROW_NUM = 4;
+
+    public static final int CARD_PADDING = 15;
+
     //记录方阵
-    private Card[][] cardsMap = new Card[4][4];
+    private Card[][] cardsMap = new Card[ROW_NUM][ROW_NUM];
     //记录card为空的位置
     private List<Point> emptyPoints = new ArrayList<>();
-
 
     public GameView(Context context) {
         this(context, null);
@@ -38,16 +41,15 @@ public class GameView extends GridLayout {
         initGameView();
     }
 
-
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
         super.onMeasure(widthSpec, widthSpec);
     }
 
     private void initGameView() {
-        setColumnCount(4);
-        setBackgroundColor(getResources().getColor(R.color.game_background));
 
+        setColumnCount(ROW_NUM);
+        setBackgroundColor(getResources().getColor(R.color.game_background));
 
         //判断用户的意图，记录下手指按下，和手指离开的位置
         setOnTouchListener(new OnTouchListener() {
@@ -93,7 +95,9 @@ public class GameView extends GridLayout {
 
     interface OnGameListener {
         void addScore(int score);
+
         void clearScore();
+
         void gameOver();
     }
 
@@ -103,26 +107,24 @@ public class GameView extends GridLayout {
         mOnGameListener = listener;
     }
 
+
     private void swipeLeft() {
-
         boolean isMerge = false;
-
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
-                for (int x1 = x + 1; x1 < 4; x1++) {
-
+        for (int y = 0; y < ROW_NUM; y++) {
+            for (int x = 0; x < ROW_NUM; x++) {
+                for (int x1 = x + 1; x1 < ROW_NUM; x1++) {
 
                     if (cardsMap[x1][y].getNum() > 0) {
                         if (cardsMap[x][y].getNum() <= 0) {
 
-                            //移动到空白位置
                             cardsMap[x][y].setNum(cardsMap[x1][y].getNum());
                             cardsMap[x1][y].setNum(0);
 
-                            x--;
 
+                            x--;
                             isMerge = true;
-                        } else if (cardsMap[x][y].equals(cardsMap[x1][y])){
+
+                        } else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
 
 
                             //合并数字
@@ -150,8 +152,8 @@ public class GameView extends GridLayout {
 
         boolean isMerge = false;
 
-        for (int y = 0; y < 4; y++) {
-            for (int x = 3; x >= 0; x--) {
+        for (int y = 0; y < ROW_NUM; y++) {
+            for (int x = ROW_NUM - 1; x >= 0; x--) {
                 for (int x1 = x - 1; x1 >= 0; x1--) {
                     if (cardsMap[x1][y].getNum() > 0) {
                         if (cardsMap[x][y].getNum() <= 0) {
@@ -160,7 +162,7 @@ public class GameView extends GridLayout {
                             x++;
 
                             isMerge = true;
-                        } else if (cardsMap[x][y].equals(cardsMap[x1][y])){
+                        } else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
                             cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
                             cardsMap[x1][y].setNum(0);
                             //记录分数
@@ -184,9 +186,9 @@ public class GameView extends GridLayout {
 
         boolean isMerge = false;
 
-        for (int x = 0; x < 4; x++) {
-            for (int y = 0; y < 4; y++) {
-                for (int y1 = y + 1; y1 < 4; y1++) {
+        for (int x = 0; x < ROW_NUM; x++) {
+            for (int y = 0; y < ROW_NUM; y++) {
+                for (int y1 = y + 1; y1 < ROW_NUM; y1++) {
                     if (cardsMap[x][y1].getNum() > 0) {
                         if (cardsMap[x][y].getNum() <= 0) {
                             cardsMap[x][y].setNum(cardsMap[x][y1].getNum());
@@ -194,7 +196,7 @@ public class GameView extends GridLayout {
                             y--;
 
                             isMerge = true;
-                        } else if (cardsMap[x][y].equals(cardsMap[x][y1])){
+                        } else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
                             cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
                             cardsMap[x][y1].setNum(0);
                             //记录分数
@@ -218,8 +220,8 @@ public class GameView extends GridLayout {
 
         boolean isMerge = false;
 
-        for (int x = 0; x < 4; x++) {
-            for (int y = 3; y >= 0; y--) {
+        for (int x = 0; x < ROW_NUM; x++) {
+            for (int y = ROW_NUM - 1; y >= 0; y--) {
                 for (int y1 = y - 1; y1 >= 0; y1--) {
                     if (cardsMap[x][y1].getNum() > 0) {
                         if (cardsMap[x][y].getNum() <= 0) {
@@ -228,7 +230,7 @@ public class GameView extends GridLayout {
                             y++;
 
                             isMerge = true;
-                        } else if (cardsMap[x][y].equals(cardsMap[x][y1])){
+                        } else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
                             cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
                             cardsMap[x][y1].setNum(0);
                             //记录分数
@@ -255,55 +257,47 @@ public class GameView extends GridLayout {
         //在第一次创建的时候被执行
 
         //每一张卡片的宽高
-        int cardWidth = (Math.min(w, h) - 10) / 4;
-
+        int cardWidth = (Math.min(w, h) - CARD_PADDING) / ROW_NUM;
         //添加卡片
         addCards(cardWidth, cardWidth);
-
         startGame();
     }
 
     private void addCards(int cardWidth, int cardHeight) {
-
         Card c;
-
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
+        for (int y = 0; y < ROW_NUM; y++) {
+            for (int x = 0; x < ROW_NUM; x++) {
                 c = new Card(getContext());
                 c.setNum(0);
                 addView(c, cardWidth, cardHeight);
-
                 cardsMap[x][y] = c;
-
             }
         }
     }
 
     public void startGame() {
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
+        for (int y = 0; y < ROW_NUM; y++) {
+            for (int x = 0; x < ROW_NUM; x++) {
                 cardsMap[x][y].setNum(0);
             }
         }
-
         addRandomNum();
         addRandomNum();
-
         //mOnGameListener.clearScore();
     }
 
     //添加随机数
     private void addRandomNum() {
         emptyPoints.clear();
-        for (int y = 0 ; y < 4; y++) {
-            for (int x = 0 ; x < 4; x++) {
+        for (int y = 0; y < ROW_NUM; y++) {
+            for (int x = 0; x < ROW_NUM; x++) {
                 if (cardsMap[x][y].getNum() <= 0) {
                     emptyPoints.add(new Point(x, y));
                 }
             }
         }
         //随机位置
-        Point p = emptyPoints.remove((int)(Math.random() * emptyPoints.size()));
+        Point p = emptyPoints.remove((int) (Math.random() * emptyPoints.size()));
         //在随机的位置上设置随机值 2，4，比例为 9 ： 1
         cardsMap[p.x][p.y].setNum(Math.random() > 0.1 ? 2 : 4);
 
@@ -312,6 +306,7 @@ public class GameView extends GridLayout {
 
     /**
      * 生成卡片动画
+     *
      * @param card
      */
     private void animCreate(Card card) {
@@ -324,28 +319,22 @@ public class GameView extends GridLayout {
         card.startAnimation(sa);
     }
 
-
     //检查游戏是否结束
     private void checkComplete() {
-
         boolean isComplete = true;
-
         ALL:
-        for (int y = 0 ; y < 4; y++) {
-            for (int x = 0 ; x < 4; x++) {
+        for (int y = 0; y < ROW_NUM; y++) {
+            for (int x = 0; x < ROW_NUM; x++) {
                 if (cardsMap[x][y].getNum() == 0 ||
-                        (x > 0 && cardsMap[x][y].equals(cardsMap[x-1][y])) ||
-                        (x < 3 && cardsMap[x][y].equals(cardsMap[x+1][y])) ||
-                        (y > 0 && cardsMap[x][y].equals(cardsMap[x][y-1])) ||
-                        (y < 3 && cardsMap[x][y].equals(cardsMap[x][y+1])) ) {
-
+                        (x > 0 && cardsMap[x][y].equals(cardsMap[x - 1][y])) ||
+                        (x < ROW_NUM - 1 && cardsMap[x][y].equals(cardsMap[x + 1][y])) ||
+                        (y > 0 && cardsMap[x][y].equals(cardsMap[x][y - 1])) ||
+                        (y < ROW_NUM - 1 && cardsMap[x][y].equals(cardsMap[x][y + 1]))) {
                     isComplete = false;
-
                     break ALL;
                 }
             }
         }
-
         if (isComplete) {
             mOnGameListener.gameOver();
         }

@@ -13,15 +13,25 @@ public class Card extends FrameLayout {
 
     private TextView label;
 
+    public TextView getLabel() {
+        return label;
+    }
+
+    public void setLabel(TextView label) {
+        this.label = label;
+    }
+
+
     public Card(Context context) {
         super(context);
 
         label = new TextView(getContext());
-        label.setTextSize(32);
+        label.setTextSize(33);
         label.setGravity(Gravity.CENTER);
 
+
         LayoutParams lp = new LayoutParams(-1, -1);
-        lp.setMargins(10, 10, 0, 0);
+        lp.setMargins(GameView.CARD_PADDING, GameView.CARD_PADDING, 0, 0);
         addView(label, lp);
 
         setNum(0);
@@ -35,6 +45,12 @@ public class Card extends FrameLayout {
 
     public void setNum(int num) {
         this.num = num;
+
+        if (num <= 4 ) {
+            label.setTextColor(getResources().getColor(R.color.text_color));
+        } else {
+            label.setTextColor(0xffffffff);
+        }
 
 
         switch (num) {

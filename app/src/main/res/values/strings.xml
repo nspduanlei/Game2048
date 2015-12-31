@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Game2048</string>
-    <string name="score">分数：</string>
+    <string name="score">分    数</string>
     <string name="restart">重新开始</string>
     <string name="share">分享</string>
+    <string name="record">历史最高</string>
 </resources>
