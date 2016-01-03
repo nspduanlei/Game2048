@@ -43,7 +43,7 @@ public class GameView extends GridLayout {
 
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
-        super.onMeasure(widthSpec, widthSpec);
+        super.onMeasure(widthSpec, heightSpec);
     }
 
     private void initGameView() {

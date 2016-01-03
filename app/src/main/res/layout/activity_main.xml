@@ -39,7 +39,8 @@
                 android:background="@drawable/text_bg"
                 android:text="@string/score"
                 android:gravity="center"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tvScore"
@@ -64,7 +65,8 @@
                 android:text="@string/record"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tvRecord"
