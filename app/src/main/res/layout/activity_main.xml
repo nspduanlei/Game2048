@@ -12,6 +12,11 @@
 
         <include layout="@layout/toolbar_layout"/>
 
+        <com.duanlei.game2048.GameView
+            android:id="@+id/gameView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,21 +88,13 @@
                     android:text="0"
                     android:textStyle="bold"/>
             </LinearLayout>
-
-
         </LinearLayout>
-
-        <com.duanlei.game2048.GameView
-            android:id="@+id/gameView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/ad_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="@color/c16"/>
 </RelativeLayout>
