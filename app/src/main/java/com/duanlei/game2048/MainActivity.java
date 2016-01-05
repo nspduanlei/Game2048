@@ -29,10 +29,8 @@ public class MainActivity extends AppCompatActivity implements GameView.OnGameLi
     //广告
     AdView mAdView;
     RelativeLayout mAdContainer;
-    public static final String PUBLISHER_ID = "56OJyM1ouMGoaSnvCK";
-    public static final String InlinePPID = "16TLwebvAchksY6iO_8oSb-i";
-    public static final String InterstitialPPID = "16TLwebvAchksY6iOa7F4DXs";
-    public static final String SplashPPID = "16TLwebvAchksY6iOGe3xcik";
+    public static final String PUBLISHER_ID = "56OJ2pJouNwQGe59/O";
+    public static final String InlinePPID = "16TLPvFvApSS1NUUvUMArf1s";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
