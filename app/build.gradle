@@ -17,7 +17,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        game2048 {
+            applicationId 'com.duanlei.game2048'
+        }
+
+        game2048_baiduad {
+            applicationId 'com.duanlei.game2048'
+        }
+
+        game2048_domob {
+            applicationId 'com.duanlei.game2048'
+        }
+    }
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
