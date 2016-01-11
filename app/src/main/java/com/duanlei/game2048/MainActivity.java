@@ -1,23 +1,15 @@
 package com.duanlei.game2048;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import cn.domob.android.ads.AdEventListener;
-import cn.domob.android.ads.AdManager;
-import cn.domob.android.ads.AdView;
 
 public class MainActivity extends AppCompatActivity implements GameView.OnGameListener {
 
@@ -26,11 +18,7 @@ public class MainActivity extends AppCompatActivity implements GameView.OnGameLi
     private GameView gameView;
     private static final String PRE_RECORD = "record";
 
-    //广告
-    AdView mAdView;
-    RelativeLayout mAdContainer;
-    public static final String PUBLISHER_ID = "56OJ2pJouNwQGe59/O";
-    public static final String InlinePPID = "16TLPvFvApSS1NUUvUMArf1s";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,53 +66,7 @@ public class MainActivity extends AppCompatActivity implements GameView.OnGameLi
     }
 
     private void addAd() {
-        mAdContainer = (RelativeLayout)findViewById(R.id.ad_container);
-        mAdView = new AdView(this, PUBLISHER_ID, InlinePPID);
-        mAdView.setKeyword("game");
-        mAdView.setUserGender("male");
-        mAdView.setUserBirthdayStr("2000-08-08");
-        mAdView.setUserPostcode("123456");
-        mAdView.setAdEventListener(new AdEventListener() {
-            @Override
-            public void onAdOverlayPresented(AdView adView) {
-                Log.i("DomobSDKDemo", "overlayPresented");
-            }
 
-            @Override
-            public void onAdOverlayDismissed(AdView adView) {
-                Log.i("DomobSDKDemo", "Overrided be dismissed");
-            }
-
-            @Override
-            public void onAdClicked(AdView arg0) {
-                Log.i("DomobSDKDemo", "onDomobAdClicked");
-            }
-
-            @Override
-            public void onLeaveApplication(AdView arg0) {
-                Log.i("DomobSDKDemo", "onDomobLeaveApplication");
-            }
-
-            @Override
-            public Context onAdRequiresCurrentContext() {
-                return MainActivity.this;
-            }
-
-            @Override
-            public void onAdFailed(AdView arg0, AdManager.ErrorCode arg1) {
-                Log.i("DomobSDKDemo", "onDomobAdFailed");
-            }
-
-            @Override
-            public void onEventAdReturned(AdView arg0) {
-                Log.i("DomobSDKDemo", "onDomobAdReturned");
-            }
-        });
-        RelativeLayout.LayoutParams layout = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        layout.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        mAdView.setLayoutParams(layout);
-        mAdContainer.addView(mAdView);
     }
 
     public void showScore() {
